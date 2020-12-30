@@ -15,12 +15,16 @@ export const App = () => {
 
   const toggle = () => {
     seconds === 0 && setSeconds(document.getElementById("input").value * 60);
+    seconds === 0 &&
+      isActive === false &&
+      (document.getElementById("input").value = 15) &&
+      setSeconds(900);
     setIsActive(!isActive);
   };
   const reset = () => {
     setIsActive(false);
     setSeconds(0);
-    document.getElementById("input").value = 0;
+    document.getElementById("input").value = 15;
   };
   useEffect(() => {
     document.getElementById("input").value = 15;
@@ -31,10 +35,10 @@ export const App = () => {
       interval = setInterval(() => {
         setSeconds((seconds) => seconds - 1);
       }, 1000);
-      console.log(seconds, isActive);
     } else if ((!isActive && seconds !== 0) || seconds <= 0) {
       clearInterval(interval);
       setIsActive(false);
+      isActive && (document.getElementById("input").value = 15);
     }
     return () => clearInterval(interval);
   }, [isActive, seconds]);
@@ -66,13 +70,19 @@ export const App = () => {
         inputMode="numeric"
         title="max 59"
       />
-      <button className="start" onClick={toggle} disabled={seconds === 0}>
-        {!isActive ? "START" : "PAUSE"}
+      <button className="start" onClick={toggle}>
+        {!isActive
+          ? document.getElementById("input") &&
+            document.getElementById("input").value * 60 !== seconds &&
+            seconds !== 0
+            ? "RESUME"
+            : "START"
+          : "PAUSE"}
       </button>
       <button
         className="reset"
         onClick={reset}
-        disabled={isActive || seconds === 0}
+        disabled={isActive || seconds === 0 || seconds === 900}
       >
         RESET
       </button>

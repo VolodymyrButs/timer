@@ -32,11 +32,13 @@ button {
   font-size: 20px;
   background-color: #00d60a;
   border-color: #00d60a;
+  text-align: center;
 }
 input {
   left: 20px;
   width: 50px;
   height: 30px;
+  padding: 1px 2px;
 }
 button :focus {
   outline: none;
@@ -44,11 +46,13 @@ button :focus {
 button {
   left: 87px;
   height: 36px;
+  width: 102px;
 }
 .reset {
-  left: 175px;
+  width: auto;
+  left: 196px;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 850px) {
   .output {
     flex-direction: column;
   }
@@ -57,17 +61,22 @@ button {
   }
   .output > p {
     font-size: 70px;
+    min-width: 90px;
   }
   .App > div {
     transform: translate(calc(50vw - 3em), -4em);
   }
   input {
-    left: calc(50vw - 120px);
+    left: calc(50vw - 130px);
   }
   button {
-    left: calc(50vw - 52px);
+    left: calc(50vw - 57px);
   }
   .reset {
-    left: calc(50vw + 35px);
+    left: calc(50vw + 57px);
+  }
+  input,
+  button {
+    bottom: 70px;
   }
 }
